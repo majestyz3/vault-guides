@@ -8,6 +8,24 @@ provider "aws" {
 //--------------------------------------------------------------------
 // Resources
 
+
+resource "aws_vpc" "vpc-zarkesh" {
+  cidr_block       = "10.0.0.0/16"
+  instance_tenancy = "default"
+
+  tags = {
+    Name = "${var.environment_name}-vault-vpc"
+  }
+}
+
+resource "aws_s3_bucket" "zarkesh-chef-approle" {
+  bucket = var.s3_bucket_name
+
+  tags = {
+    Name        = "zarkesh-chef-approle-s3"
+  }
+}
+
 resource "aws_instance" "vault" {
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = var.instance_type
