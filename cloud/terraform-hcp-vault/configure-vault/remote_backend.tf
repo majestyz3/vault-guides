@@ -3,7 +3,7 @@ terraform {
     hostname = "app.terraform.io"
     organization = "hashicorp-zarkesh"
     workspaces {
-      name = "hcp-setup-terraform-provider-vault"
+      name = "hcp-configure-vault-with-terraform"
     }
   }
 }
