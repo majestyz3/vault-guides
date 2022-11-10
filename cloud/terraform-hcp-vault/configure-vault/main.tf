@@ -16,7 +16,7 @@
 # To leverage more than one namespace, define a vault provider per namespace
 #
 #   admin
-#    ├── salesforce
+#    ├── education
 #    │   └── training
 #    │       └── boundary
 #    └── test
@@ -28,34 +28,34 @@ provider "vault" {
 }
 
 #--------------------------------------
-# Create 'admin/salesforce' namespace
+# Create 'admin/education' namespace
 #--------------------------------------
-resource "vault_namespace" "salesforce" {
+resource "vault_namespace" "education" {
   provider = vault.admin
-  path = "salesforce"
+  path = "education"
 }
 
 provider "vault" {
-  alias = "salesforce"
-  namespace = "admin/salesforce"
+  alias = "education"
+  namespace = "admin/education"
 }
 
 #---------------------------------------------------
-# Create 'admin/salesforce/training' namespace
+# Create 'admin/education/training' namespace
 #---------------------------------------------------
 resource "vault_namespace" "training" {
-  depends_on = [vault_namespace.salesforce]
-  provider = vault.salesforce
+  depends_on = [vault_namespace.education]
+  provider = vault.education
   path = "training"
 }
 
 provider "vault" {
   alias = "training"
-  namespace = "admin/salesforce/training"
+  namespace = "admin/education/training"
 }
 
 #-----------------------------------------------------------
-# Create 'admin/salesforce/training/boundary' namespace
+# Create 'admin/education/training/boundary' namespace
 #-----------------------------------------------------------
 resource "vault_namespace" "boundary" {
   depends_on = [vault_namespace.training]
@@ -65,7 +65,7 @@ resource "vault_namespace" "boundary" {
 
 provider "vault" {
   alias = "boundary"
-  namespace = "admin/salesforce/training/boundary"
+  namespace = "admin/education/training/boundary"
 }
 
 #--------------------------------------
