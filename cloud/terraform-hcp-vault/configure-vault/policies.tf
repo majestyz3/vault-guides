@@ -5,15 +5,15 @@ resource "vault_policy" "admin_policy" {
   policy = file("policies/admin-policy.hcl")
 }
 
-# Create an admins policy in the admin/education namespace
-resource "vault_policy" "admin_policy_education" {
-  provider = vault.education
-  depends_on = [vault_namespace.education]
+# Create an admins policy in the admin/salesforce namespace
+resource "vault_policy" "admin_policy_salesforce" {
+  provider = vault.salesforce
+  depends_on = [vault_namespace.salesforce]
   name   = "admins"
   policy = file("policies/admin-policy.hcl")
 }
 
-# Create an admins policy in the admin/education/training namespace
+# Create an admins policy in the admin/salesforce/training namespace
 resource "vault_policy" "admin_policy_training" {
   provider = vault.training
   depends_on = [vault_namespace.training]
@@ -21,7 +21,7 @@ resource "vault_policy" "admin_policy_training" {
   policy = file("policies/admin-policy.hcl")
 }
 
-# Create admins policy in the admin/education/training/boundary namespace
+# Create admins policy in the admin/salesforce/training/boundary namespace
 resource "vault_policy" "admin_policy_boundary" {
   provider = vault.boundary
   depends_on = [vault_namespace.boundary]
@@ -45,10 +45,10 @@ resource "vault_policy" "tester_policy" {
   policy = file("policies/tester.hcl")
 }
 
-# Create an eaas-client policy in the admin/education namespace
+# Create an eaas-client policy in the admin/salesforce namespace
 resource "vault_policy" "eaas-client_policy" {
-  provider = vault.education
-  depends_on = [vault_namespace.education]
+  provider = vault.salesforce
+  depends_on = [vault_namespace.salesforce]
   name   = "eaas-client"
   policy = file("policies/eaas-client-policy.hcl")
 }
